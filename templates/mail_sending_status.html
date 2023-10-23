@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+<main>
+    <h1 class="visually-hidden">Delivery-am</h1>
+
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/dashboard"
+               class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img src="{{ url_for('static', path='/img/simple_logo.png') }}" alt="" width="32" height="32">
+                <span class="fs-4" style="margin-left: 20px;">Delivery-am</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="#" class="nav-link">Рассылки</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link2</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link3</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link4</a></li>
+                <li class="nav-item"><a href="/" class="nav-link">Выйти</a></li>
+            </ul>
+        </header>
+    </div>
+    <div class="container">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard">Главная</a></li>
+                <li class="breadcrumb-item"><a href="/mails">Рассылки</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Рассылка простых текстовых писем</li>
+            </ol>
+        </nav>
+        {% block asd%}
+            {% if mes %}
+                {% if mes == 'Сообщение успешно отправлено!' or 'успешно удалена!' in mes %}
+                    <div class="alert alert-success" role="alert" style="width: auto;">
+                        {{mes}}
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger" role="alert" style="width: auto;">
+                        {{mes}}
+                    </div>
+                {% endif %}
+            {% endif %}
+    {% endblock %}
+    </div>
+</main>
+</body>
+{% endblock %}

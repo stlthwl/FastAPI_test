@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+<main>
+    <h1 class="visually-hidden">Delivery-am</h1>
+
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/dashboard"
+               class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img src="{{ url_for('static', path='/img/simple_logo.png') }}" alt="" width="32" height="32">
+                <span class="fs-4" style="margin-left: 20px;">Delivery-am</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Рассылки</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link2</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link3</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link4</a></li>
+                <li class="nav-item"><a href="/" class="nav-link">Выйти</a></li>
+            </ul>
+        </header>
+    </div>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard">Главная</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Рассылки</li>
+            </ol>
+        </div>
+    </nav>
+    {% block asd%}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Рассылка простых текстовых писем</h5>
+                        <p class="card-text">Создайте простую текстовую рассылку для пользователей.</p>
+                        <a href="/create/simple_mail_sending" class="btn btn-primary">Создать</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Рассылка по шаблону</h5>
+                        <p class="card-text">Создайте рассылку по шаблону с подстановкой динамических атрибутов.</p>
+                        <a href="#" class="btn btn-primary">Создать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    <!--   table     -->
+    <br>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                {% for title in res_df %}
+                {% if title != 'sort' %}
+                <th scope="col">{{ title }}</th>
+                {% endif %}
+                {% endfor %}
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for line in res_df['sort'] %}
+            <tr>
+                <th scope="row">{{ line }}</th>
+                <td>{{ res_df.iloc[line - 1][1] }}</td>
+                {% if res_df.iloc[line - 1][2] == 'success' %}
+                <td class="text-success">{{ res_df.iloc[line -1][2] }}</td>
+                {% else %}
+                <td class="text-danger">{{ res_df.iloc[line -1][2] }}</td>
+                {% endif %}
+                <td>{{ res_df.iloc[line -1][3] }}</td>
+                <td>{{ res_df.iloc[line -1][4] }}</td>
+                <td style="cursor: pointer">
+                    <a href="/mails/{{ res_df.iloc[line -1][0] }}" class="btn-primary"><i class="bi bi-eye">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-eye" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                        </svg>
+                    </i></a></td>
+                <td><a href="/mails/dlt/{{ res_df.iloc[line -1][0] }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd"
+                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                </a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!--    modal-->
+
+    <!--<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+    <!--  <div class="modal-dialog modal-dialog-centered">-->
+    <!--    <div class="modal-content">-->
+    <!--      <div class="modal-header">-->
+    <!--        <h1 class="modal-title fs-5" id="staticBackdropLabel">Рассылка №1 от </h1>-->
+    <!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>-->
+    <!--      </div>-->
+    <!--      <div class="modal-body">-->
+    <!--          Тема: <br><br>-->
+    <!--          -->
+
+    <!--      </div>-->
+    <!--      <div class="modal-footer">-->
+    <!--        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>-->
+    <!--        <button type="button" class="btn btn-primary">Понял</button>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--</div>-->
+
+</main>
+</body>
+{% endblock %}

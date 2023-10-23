@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body class="d-flex align-items-center py-4 bg-body-tertiary">
+<main class="form-signin w-100 m-auto">
+    <form action="/sign_in" method="post">
+        <img class="mb-4" src="{{ url_for('static', path='/img/main_logo.png') }}" alt="" width="280" height="70">
+        <div class="form-floating">
+            <input type="email" class="form-control" id="login" name="login" placeholder="name@example.com">
+            <label for="login">Login</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <label for="password">password</label>
+        </div>
+
+        {% if login_error %}
+        <div class="alert alert-danger" role="alert">
+            <p>Неправильный логин или пароль</p>
+        </div>
+        {% endif %}
+        <button class="btn btn-primary w-100 py-2" type="submit">Войти</button>
+        <p class="mt-5 mb-3 text-body-secondary" style="text-align: center;">&copy;2023</p>
+    </form>
+</main>
+</body>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+<main>
+    <h1 class="visually-hidden">Delivery-am</h1>
+
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="#"
+               class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img src="{{ url_for('static', path='/img/simple_logo.png') }}" alt="" width="32" height="32">
+                <span class="fs-4" style="margin-left: 20px;">Delivery-am</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/mails" class="nav-link" aria-current="page">Рассылки</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link2</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link3</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link4</a></li>
+                <li class="nav-item"><a href="/" class="nav-link">Выйти</a></li>
+            </ul>
+        </header>
+    </div>
+    {% block asd%}
+    <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                    aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="height: 400px">
+                <img src="{{ url_for('static', path='/img/img1.png') }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>First slide label</h5>
+                    <p>Some representative placeholder content for the first slide.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', path='/img/img1.png') }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Second slide label</h5>
+                    <p>Some representative placeholder content for the second slide.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{ url_for('static', path='/img/img1.png') }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Third slide label</h5>
+                    <p>Some representative placeholder content for the third slide.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    {% endblock %}
+</main>
+</body>
+{% endblock %}

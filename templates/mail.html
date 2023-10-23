@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+<main>
+    <h1 class="visually-hidden">Delivery-am</h1>
+
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/dashboard"
+               class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img src="{{ url_for('static', path='/img/simple_logo.png') }}" alt="" width="32" height="32">
+                <span class="fs-4" style="margin-left: 20px;">Delivery-am</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="#" class="nav-link" aria-current="page">Рассылки</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link2</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link3</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">link4</a></li>
+                <li class="nav-item"><a href="/" class="nav-link">Выйти</a></li>
+            </ul>
+        </header>
+        {% for i in mail_data %}
+    </div>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard">Главная</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="/mails">Рассылки</a></li>
+                <li class="breadcrumb-item active" aria-current="page">#{{ i[0] }}</li>
+            </ol>
+        </div>
+    </nav>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Инициирвал</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Статус</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td scope="row">{{ mail_data[0][3] }}</td>
+                <td>{{ mail_data[0][1] }}</td>
+                {% if mail_data[0][2] == 'success' %}
+                <td class="text-success">{{ mail_data[0][2] }}</td>
+                {% else %}
+                <td class="text-danger">{{ mail_data[0][2] }}</td>
+                {% endif %}
+            </tr>
+            </tbody>
+        </table>
+
+        <form action="/mails/simple_mail_sending/create" method="post">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" name="email"
+                       placeholder="name1@example.com, name2@example.com" value="{{ mail_data[0][4] }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="subj" class="form-label">Тема</label>
+                <input type="text" class="form-control" id="subj" name="subj" value="{{ mail_data[0][-3] }}"
+                       required>
+            </div>
+            <div class="mb-3" hidden>
+                <label for="parent" class="form-label">parent_id</label>
+                <input type="text" class="form-control" id="parent" name="parent" value="{{ mail_data[0][0] }}"
+                       required>
+            </div>
+            <div class="mb-3">
+                <label for="msg" class="form-label">Текст сообщения</label>
+                <textarea class="form-control" id="msg" name="msg" rows="3" required>{{ mail_data[0][-2] }}</textarea>
+                <!--  <input type="password" class="form-control" id="password" name="password" placeholder="Password">-->
+                <!--      <label for="password">password</label>-->
+            </div>
+            <div style="display: flex;">
+                <abbr title="Диалектический материализм"></abbr>
+                <button class="btn btn-primary" data-bs-target="#staticBackdrop">
+                    Инициировать повторную рассылку
+                </button>
+            </div>
+        </form>
+    </div>
+    {% endfor %}
+
+
+</main>
+</body>
+{% endblock %}
